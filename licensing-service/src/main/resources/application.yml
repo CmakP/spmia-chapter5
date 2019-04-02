@@ -13,3 +13,12 @@ logging:
     com.netflix: WARN
     org.springframework.web: WARN
     com.thoughtmechanix: DEBUG
+#For a list of Hystrix configuration command properties:
+#@SEE https://github.com/Netflix/Hystrix/wiki/Configuration#intro
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 12000

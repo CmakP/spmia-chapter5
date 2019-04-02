@@ -10,3 +10,22 @@ spring:
 #      discovery:
 #        enabled: true
 #        serviceId: configserver
+# In a production system, the Hystrix data that’s most likely to need to be tweaked (timeout parameters, thread pool counts) would be
+# externalized to Spring Cloud Config. This way if you need to change the parameter values, you could change the values and then restart
+# the service instanceswithout having to recompile and redeploy the application.
+#      threadPoolProperties:
+#        coreSize: 30
+#        maxQueueSize: 10
+#      commandProperties:
+#        execution:
+#          isolation:
+#            thread:
+#              timeoutInMilliseconds: 12000
+#        circuitBreaker:
+#          requestVolumeThreshold: 10
+#          errorThresholdPercentage: 75
+#          sleepWindowInMilliseconds: 7000
+#        metrics:
+#          rollingStats:
+#            timeInMilliseconds: 15000
+#            numBuckets: 5

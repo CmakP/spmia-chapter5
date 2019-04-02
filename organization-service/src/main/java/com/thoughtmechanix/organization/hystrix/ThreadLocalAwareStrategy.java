@@ -6,6 +6,8 @@ import com.netflix.hystrix.strategy.concurrency.HystrixRequestVariable;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestVariableLifecycle;
 import com.netflix.hystrix.strategy.properties.HystrixProperty;
 import com.thoughtmechanix.organization.utils.UserContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -15,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy{
     private HystrixConcurrencyStrategy existingConcurrencyStrategy;
+
+    private static final Logger logger = LoggerFactory.getLogger(ThreadLocalAwareStrategy.class);
 
     public ThreadLocalAwareStrategy(
             HystrixConcurrencyStrategy existingConcurrencyStrategy) {
@@ -51,7 +55,7 @@ public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy{
 
     @Override
     public <T> Callable<T> wrapCallable(Callable<T> callable) {
-
+        logger.info("com.thoughtmechanix.organization.hystrix.ThreadLocalAwareStrategy:wrapCallable - callable: " + callable.getClass());
         return existingConcurrencyStrategy != null
                 ? existingConcurrencyStrategy
                 .wrapCallable(new DelegatingUserContextCallable<T>(callable, UserContextHolder.getContext()))

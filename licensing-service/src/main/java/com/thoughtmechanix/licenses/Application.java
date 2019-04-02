@@ -12,6 +12,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @EnableCircuitBreaker
 public class Application {
+
+    /**
+     * Now that the bean definition for the Ribbon-backed RestTemplate class is defined, any time you want to use the
+     * RestTemplate bean to call a service, you only need to auto-wire it into the class using it.
+     */
     @LoadBalanced
     @Bean
     public RestTemplate restTemplate() {

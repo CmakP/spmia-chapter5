@@ -3,6 +3,8 @@ package com.thoughtmechanix.organization.controllers;
 
 import com.thoughtmechanix.organization.model.Organization;
 import com.thoughtmechanix.organization.services.OrganizationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,11 @@ public class OrganizationServiceController {
     @Autowired
     private OrganizationService orgService;
 
+    private static Logger logger = LoggerFactory.getLogger(OrganizationServiceController.class);
+
     @RequestMapping(value="/{organizationId}",method = RequestMethod.GET)
     public Organization getOrganization( @PathVariable("organizationId") String organizationId) {
+        logger.info("(###OrganizationServiceController.getOrganization) HIT");
         return orgService.getOrg(organizationId);
     }
 
